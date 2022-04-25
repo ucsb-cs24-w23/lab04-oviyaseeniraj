@@ -48,8 +48,8 @@ class IntBST {
     void printPreOrder(Node *n) const;
     void printInOrder(Node *n) const;
     void printPostOrder(Node *n) const;
-    int sum(Node *n) const;
-    int count(Node *n) const;
+    int sum(Node *n) const; // helper function for public sum() method
+    int count(Node *n) const; //helper funcction for public count() method
 
     // these should be used by getPredecessor and getSuccessor, and ONE of them should be used by remove
     Node* getSuccessorNode(int value) const;   // returns the Node containing the successor of the given value
