@@ -68,42 +68,64 @@ bool IntBST::insert(int value)
 // recursive helper for insert (assumes n is never 0)
 bool IntBST::insert(int value, Node *n)
 {
+    // base case:
+    if (n == nullptr)
+    {
+        n->info = value;
+        return true;
+    }
+
     if (n->info == value)
     {
         return false;
     }
 
-    if (n->info > value)
+    if (value < n->info)
     {
-        if (n->left != nullptr && n->left->info >= value)
-        {
-            insert(value, n->left);
-        }
-        else
-        {
-            Node *toInsert = new Node(value);
-            n->left->parent = toInsert;
-            toInsert->parent = n;
-            return true;
-        }
+        insert(value, n->left);
     }
 
-    else
+    else if (value > n->info)
     {
-        if (n->right != nullptr && n->right->info >= value)
-        {
-            insert(value, n->right);
-        }
-        else
-        {
-            Node *toInsert = new Node(value);
-            n->right->parent = toInsert;
-            toInsert->parent = n;
-            return true;
-        }
+        insert(value, n->right);
     }
 
-    return false;
+        // if (n->info == value)
+    // {
+    //     return false;
+    // }
+
+    // if (n->info > value)
+    // {
+    //     if (n->left != nullptr && n->left->info >= value)
+    //     {
+    //         insert(value, n->left);
+    //     }
+    //     else
+    //     {
+    //         Node *toInsert = new Node(value);
+    //         n->left->parent = toInsert;
+    //         toInsert->parent = n;
+    //         return true;
+    //     }
+    // }
+
+    // else
+    // {
+    //     if (n->right != nullptr && n->right->info >= value)
+    //     {
+    //         insert(value, n->right);
+    //     }
+    //     else
+    //     {
+    //         Node *toInsert = new Node(value);
+    //         n->right->parent = toInsert;
+    //         toInsert->parent = n;
+    //         return true;
+    //     }
+    // }
+
+    // return false;
 }
 
 // print tree data pre-order
