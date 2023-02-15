@@ -75,12 +75,7 @@ bool IntBST::insert(int value, Node *n)
         return true;
     }
 
-    if (n->info == value)
-    {
-        return false;
-    }
-
-    if (value < n->info)
+    else if (value < n->info)
     {
         insert(value, n->left);
     }
@@ -90,7 +85,9 @@ bool IntBST::insert(int value, Node *n)
         insert(value, n->right);
     }
 
-        // if (n->info == value)
+    return false;
+
+    // if (n->info == value)
     // {
     //     return false;
     // }
