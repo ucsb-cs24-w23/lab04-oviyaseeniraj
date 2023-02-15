@@ -71,10 +71,7 @@ bool IntBST::insert(int value, Node *n)
     // base case:
     if (n == nullptr)
     {
-        Node *temp = new Node(value);
-        temp->right = nullptr;
-        temp->left = nullptr;
-        n = temp;
+        n = new Node(value);
 
         return true;
     }
