@@ -149,7 +149,7 @@ void IntBST::printPreOrder(Node *n) const
     {
         return;
     }
-    cout << n->info;
+    cout << n->info << " ";
     printPreOrder(n->left);
     printPreOrder(n->right);
 }
@@ -167,7 +167,7 @@ void IntBST::printInOrder(Node *n) const
         return;
     }
     printInOrder(n->left);
-    cout << n->info;
+    cout << n->info << " ";
     printInOrder(n->right);
 }
 
@@ -185,7 +185,7 @@ void IntBST::printPostOrder(Node *n) const
     }
     printPostOrder(n->left);
     printPostOrder(n->right);
-    cout << n->info;
+    cout << n->info << " ";
 }
 
 // return sum of values in tree
@@ -302,7 +302,7 @@ IntBST::Node *IntBST::getSuccessorNode(int value) const
 {
     Node *n = getNodeFor(value, this->root);
 
-    if (n = NULL)
+    if (n == NULL)
     {
         return nullptr;
     }
