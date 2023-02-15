@@ -71,12 +71,10 @@ bool IntBST::insert(int value, Node *n)
     // base case:
     if (n == nullptr)
     {
-        Node *par = n->parent;
-        n = new Node;
-        n->info = value;
-        n->right = nullptr;
-        n->left = nullptr;
-        n->parent = par;
+        Node *temp = new Node(value);
+        temp->right = nullptr;
+        temp->left = nullptr;
+        n = temp;
 
         return true;
     }
@@ -322,34 +320,34 @@ int IntBST::getSuccessor(int value) const
 // returns true if the node exist and was deleted or false if the node does not exist
 bool IntBST::remove(int value)
 {
-    Node *n = getNodeFor(value, this->root);
+    // Node *n = getNodeFor(value, this->root);
 
-    if (!n)
-    {
-        return false;
-    }
+    // if (!n)
+    // {
+    //     return false;
+    // }
 
-    if (n->parent && !n->left && !n->right)
-    {
-        n->parent == nullptr;
-        return true;
-    }
+    // if (n->parent && !n->left && !n->right)
+    // {
+    //     n->parent == nullptr;
+    //     return true;
+    // }
 
-    if (n->parent && n->info == n->parent->left->info)
-    {
-        Node *temp = getSuccessorNode(n->info);
-        n->info = temp->info;
-        delete temp;
-        return true;
-    }
+    // if (n->parent && n->info == n->parent->left->info)
+    // {
+    //     Node *temp = getSuccessorNode(n->info);
+    //     n->info = temp->info;
+    //     delete temp;
+    //     return true;
+    // }
 
-    if (n->info == n->parent->right->info)
-    {
-        Node *temp = getPredecessorNode(n->info);
-        n->info = temp->info;
-        delete temp;
-        return true;
-    }
+    // if (n->info == n->parent->right->info)
+    // {
+    //     Node *temp = getPredecessorNode(n->info);
+    //     n->info = temp->info;
+    //     delete temp;
+    //     return true;
+    // }
 
     return false;
 }
