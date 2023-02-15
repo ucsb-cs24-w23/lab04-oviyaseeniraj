@@ -72,8 +72,19 @@ bool IntBST::insert(int value, Node *n)
     if (n == nullptr)
     {
         n = new Node(value);
+        this->root = n;
 
         return true;
+    }
+
+    else if (n->left == nullptr && value < n->info)
+    {
+        n->left = new Node(value);
+    }
+
+    else if (n->right == nullptr && value > n->info)
+    {
+        n->right = new Node(value);
     }
 
     else if (value < n->info)
@@ -87,7 +98,6 @@ bool IntBST::insert(int value, Node *n)
     }
 
     return false;
-
     // if (n->info == value)
     // {
     //     return false;
@@ -254,20 +264,26 @@ IntBST::Node *IntBST::getPredecessorNode(int value) const
 {
     Node *n = getNodeFor(value, this->root);
 
-    if (n->left && n->left->right)
+    // if (n->left && n->left->right)
+    // {
+    //     n = n->left;
+    //     while (n->right)
+    //     {
+    //         n = n->right;
+    //     }
+    //     return n;
+    // }
+    // else if (n->left)
+    // {
+    //     return n->left;
+    // }
+    // return nullptr;
+
+    if (n == NULL)
     {
-        n = n->left;
-        while (n->right)
-        {
-            n = n->right;
-        }
-        return n;
     }
-    else if (n->left)
-    {
-        return n->left;
-    }
-    return nullptr;
+
+    return n;
 }
 
 // returns the predecessor value of the given value or 0 if there is none
@@ -286,20 +302,32 @@ IntBST::Node *IntBST::getSuccessorNode(int value) const
 {
     Node *n = getNodeFor(value, this->root);
 
-    if (n->right && n->right->left)
+    if (n = NULL)
     {
-        n = n->right;
-        while (n->left)
-        {
-            n = n->left;
-        }
-        return n;
+        return nullptr;
     }
-    else if (n->right)
+
+    if (!n->left && !n->right)
     {
-        return n->right;
+        return n->parent;
     }
-    return n->parent;
+
+    return n;
+
+    // if (n->right && n->right->left)
+    // {
+    //     n = n->right;
+    //     while (n->left)
+    //     {
+    //         n = n->left;
+    //     }
+    //     return n;
+    // }
+    // else if (n->right)
+    // {
+    //     return n->right;
+    // }
+    // return n->parent;
 }
 
 // returns the successor value of the given value or 0 if there is none
