@@ -264,6 +264,11 @@ bool IntBST::contains(int value) const
 // returns the Node containing the predecessor of the given value
 IntBST::Node *IntBST::getPredecessorNode(int value) const
 {
+    if (count() == 1)
+    {
+        return nullptr;
+    }
+
     Node *n = getNodeFor(value, this->root);
 
     if (n == NULL)
@@ -273,10 +278,6 @@ IntBST::Node *IntBST::getPredecessorNode(int value) const
 
     if (!n->left)
     {
-        if (n->info == this->root->info)
-        {
-            return nullptr;
-        }
 
         n = n->parent;
 
@@ -320,6 +321,11 @@ int IntBST::getPredecessor(int value) const
 // returns the Node containing the successor of the given value
 IntBST::Node *IntBST::getSuccessorNode(int value) const
 {
+    if (count() == 1)
+    {
+        return nullptr;
+    }
+
     Node *n = getNodeFor(value, this->root);
 
     if (n == NULL)
@@ -329,14 +335,9 @@ IntBST::Node *IntBST::getSuccessorNode(int value) const
 
     if (!n->right)
     {
-        if (n->info == this->root->info)
-        {
-            return nullptr;
-        }
-
         n = n->parent;
 
-        while (n->parent && n == n->parent->right)
+        while (n->parent && n == n->parent->right && value < n->parent->info)
         {
             n = n->parent;
         }
@@ -364,6 +365,7 @@ IntBST::Node *IntBST::getSuccessorNode(int value) const
 // returns the successor value of the given value or 0 if there is none
 int IntBST::getSuccessor(int value) const
 {
+
     if (getSuccessorNode(value))
     {
         return getSuccessorNode(value)->info;
