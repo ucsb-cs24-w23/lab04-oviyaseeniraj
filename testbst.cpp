@@ -16,7 +16,7 @@ int main()
     IntBST bst1, bst2;
 
     // insert data to bst1
-    bst1.insert(4);
+    bst1.insert(-4);
     bst1.insert(-7);
     bst1.insert(-12);
     bst1.insert(13);

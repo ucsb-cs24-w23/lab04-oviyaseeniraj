@@ -317,7 +317,11 @@ IntBST::Node *IntBST::getSuccessorNode(int value) const
 
     if (!n->right)
     {
-        return n->parent;
+        while (n->parent && n->info < n->parent->info)
+        {
+            n = n->parent;
+        }
+        return n;
     }
 
     if (n->right && n->right->left)
