@@ -16,14 +16,12 @@ int main()
     IntBST bst1, bst2;
 
     // insert data to bst1
-    bst1.insert(64);
-    bst1.insert(128);
-    bst1.insert(8);
-    bst1.insert(512);
-    bst1.insert(256);
-    bst1.insert(32);
-    bst1.insert(16);
     bst1.insert(4);
+    bst1.insert(-7);
+    bst1.insert(-12);
+    bst1.insert(13);
+    bst1.insert(9);
+    bst1.insert(18);
 
     // let user choose one or all tests
     bool all = true;
@@ -63,12 +61,12 @@ int main()
     }
     if (all || testnum == 6)
     {
-        cout << "  predecessor of 64 is: " << bst1.getPredecessor(64) << endl;
-        cout << "  predecessor of 512 is: " << bst1.getPredecessor(512) << endl;
-        cout << "  predecessor of 4 is: " << bst1.getPredecessor(4) << endl;
-        cout << "  successor of 64 is: " << bst1.getSuccessor(64) << endl;
-        cout << "  successor of 512 is: " << bst1.getSuccessor(512) << endl;
-        cout << "  successor of 4 is: " << bst1.getSuccessor(4) << endl;
+        cout << "  successor of -7 is: " << bst1.getSuccessor(-7) << endl;
+        cout << "  successor of -12 is: " << bst1.getSuccessor(-12) << endl;
+        cout << "  successor of 13 is: " << bst1.getSuccessor(13) << endl;
+        cout << "  successor of 9 is: " << bst1.getSuccessor(9) << endl;
+        cout << "  successor of -4 is: " << bst1.getSuccessor(-4) << endl;
+        // cout << "  successor of 4 is: " << bst1.getSuccessor(4) << endl;
     }
     if (all || testnum == 7)
     {

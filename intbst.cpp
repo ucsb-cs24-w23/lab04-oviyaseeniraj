@@ -80,11 +80,13 @@ bool IntBST::insert(int value, Node *n)
     else if (n->left == nullptr && value < n->info)
     {
         n->left = new Node(value);
+        n->left->parent = n;
     }
 
     else if (n->right == nullptr && value > n->info)
     {
         n->right = new Node(value);
+        n->right->parent = n;
     }
 
     else if (value < n->info)
@@ -313,7 +315,7 @@ IntBST::Node *IntBST::getSuccessorNode(int value) const
         return nullptr;
     }
 
-    if (!n->left && !n->right)
+    if (!n->right)
     {
         return n->parent;
     }
