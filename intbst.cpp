@@ -273,7 +273,7 @@ IntBST::Node *IntBST::getPredecessorNode(int value) const
 
     if (!n->left && !n->right)
     {
-        if (!n->parent)
+        if (n == this->root)
         {
             return nullptr;
         }
