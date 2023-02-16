@@ -321,7 +321,7 @@ int IntBST::getPredecessor(int value) const
 // returns the Node containing the successor of the given value
 IntBST::Node *IntBST::getSuccessorNode(int value) const
 {
-    if (count() == 1)
+    if (count() == 1 || count() == 0)
     {
         return nullptr;
     }
