@@ -17,11 +17,11 @@ int main()
 
     // insert data to bst1
     bst1.insert(-4);
-    // bst1.insert(-7);
-    // bst1.insert(-12);
-    // bst1.insert(13);
-    // bst1.insert(9);
-    // bst1.insert(18);
+    bst1.insert(-7);
+    bst1.insert(-12);
+    bst1.insert(13);
+    bst1.insert(9);
+    bst1.insert(18);
 
     // let user choose one or all tests
     bool all = true;
@@ -61,10 +61,10 @@ int main()
     }
     if (all || testnum == 6)
     {
-        // cout << "  successor of -7 is: " << bst1.getSuccessor(-7) << endl;
-        // cout << "  successor of -12 is: " << bst1.getSuccessor(-12) << endl;
-        // cout << "  successor of 13 is: " << bst1.getSuccessor(13) << endl;
-        // cout << "  successor of 9 is: " << bst1.getSuccessor(9) << endl;
+        cout << "  successor of -7 is: " << bst1.getSuccessor(-7) << endl;
+        cout << "  successor of -12 is: " << bst1.getSuccessor(-12) << endl;
+        cout << "  successor of 13 is: " << bst1.getSuccessor(13) << endl;
+        cout << "  successor of 9 is: " << bst1.getSuccessor(9) << endl;
         cout << "  successor of -4 is: " << bst1.getSuccessor(-4) << endl;
         // cout << "  successor of 4 is: " << bst1.getSuccessor(4) << endl;
     }
