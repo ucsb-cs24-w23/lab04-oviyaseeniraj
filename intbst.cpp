@@ -283,8 +283,11 @@ IntBST::Node *IntBST::getPredecessorNode(int value) const
         {
             n = n->parent;
         }
-
-        return 0;
+        if (n->info == value)
+        {
+            return 0;
+        }
+        return n;
     }
 
     if (n->left && n->left->right)
@@ -294,6 +297,7 @@ IntBST::Node *IntBST::getPredecessorNode(int value) const
         {
             n = n->right;
         }
+        
         return n;
     }
 
@@ -338,7 +342,12 @@ IntBST::Node *IntBST::getSuccessorNode(int value) const
         {
             n = n->parent;
         }
-        return 0;
+        
+        if (n->info == value)
+        {
+            return 0;
+        }
+        return n;
     }
 
     if (n->right && n->right->left)
