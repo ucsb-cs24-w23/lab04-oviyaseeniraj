@@ -333,6 +333,10 @@ IntBST::Node *IntBST::getSuccessorNode(int value) const
 
     if (!n->right)
     {
+        if (n->parent)
+        {
+
+        }
         Node *temp = n;
         while (temp->parent)
         {
@@ -424,34 +428,49 @@ int IntBST::getSuccessor(int value) const
 // returns true if the node exist and was deleted or false if the node does not exist
 bool IntBST::remove(int value)
 {
-    // Node *n = getNodeFor(value, this->root);
+    Node *n = getNodeFor(value, this->root);
 
-    // if (!n)
-    // {
-    //     return false;
-    // }
+    if (!n)
+    {
+        return false;
+    }
 
-    // if (n->parent && !n->left && !n->right)
-    // {
-    //     n->parent == nullptr;
-    //     return true;
-    // }
+    if (n->parent && !n->left && !n->right)
+    {
+        if (n->info < n->parent->info)
+        {
+            n->parent->left == nullptr;
+        }
+        else
+        {
+            n->parent->right == nullptr;
+        }
+        return true;
+    }
 
-    // if (n->parent && n->info == n->parent->left->info)
-    // {
-    //     Node *temp = getSuccessorNode(n->info);
-    //     n->info = temp->info;
-    //     delete temp;
-    //     return true;
-    // }
+    else if (n->left && n->right)
+    {
+        Node *temp = getSuccessorNode(n->info);
+        n->info = temp->info;
+        delete temp;
+        return true;
+    }
 
-    // if (n->info == n->parent->right->info)
-    // {
-    //     Node *temp = getPredecessorNode(n->info);
-    //     n->info = temp->info;
-    //     delete temp;
-    //     return true;
-    // }
+    else if (n->left)
+    {
+        Node *temp = n->left;
+        n->info = temp->info;
+        delete temp;
+        return true;
+    }
+
+    else if (n->right)
+    {
+        Node *temp = n->right;
+        n->info = temp->info;
+        delete temp;
+        return true;
+    }
 
     return false;
 }
