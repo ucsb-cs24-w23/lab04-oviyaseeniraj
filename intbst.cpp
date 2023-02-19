@@ -450,7 +450,7 @@ bool IntBST::remove(int value)
 
     else if (n->left && n->right)
     {
-        Node *temp = getSuccessorNode(n->info);
+        Node *temp = getPredecessorNode(n->info);
         n->info = temp->info;
         delete temp;
         return true;
