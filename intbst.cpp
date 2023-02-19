@@ -439,11 +439,11 @@ bool IntBST::remove(int value)
     {
         if (n->info < n->parent->info)
         {
-            n->parent->left == nullptr;
+            n->parent->left = nullptr;
         }
         else
         {
-            n->parent->right == nullptr;
+            n->parent->right = nullptr;
         }
         return true;
     }
