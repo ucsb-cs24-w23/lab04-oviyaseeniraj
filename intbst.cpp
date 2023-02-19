@@ -430,47 +430,136 @@ bool IntBST::remove(int value)
 {
     Node *n = getNodeFor(value, this->root);
 
+    // node does not exist, return false
     if (!n)
     {
         return false;
     }
 
-    if (n->parent && !n->left && !n->right)
+    // no child cases:
+    if (!n->left && !n->right)
     {
-        if (n->info < n->parent->info)
+        if (n->parent)
         {
-            n->parent->left = nullptr;
+            if (n->info < n->parent->info)
+            {
+                n->parent->left = nullptr;
+            }
+            else
+            {
+                n->parent->right = nullptr;
+            }
+            delete n;
+            return true;
         }
-        else
+    }
+
+    // one child cases:
+
+    if (n->left && !n->right)
+    {
+        if (n->parent->left && n == n->parent->left)
         {
-            n->parent->right = nullptr;
+            n->parent->left = n->left;
+            n->left->parent = n->parent;
+            delete n;
+            return true;
         }
-        return true;
+        else{
+            n->parent->right = n->left;
+            n->left->parent = n->parent;
+            delete n;
+            return true;
+        }
     }
 
-    else if (n->left && n->right)
+    if (n->right && !n->left)
     {
-        Node *temp = getPredecessorNode(n->info);
-        n->info = temp->info;
-        delete temp;
-        return true;
+        if (n->parent->left && n == n->parent->left)
+        {
+            n->parent->left = n->right;
+            n->right->parent = n->parent;
+            delete n;
+            return true;
+        }
+        else{
+            n->parent->right = n->right;
+            n->right->parent = n->parent;
+            delete n;
+            return true;
+        }
     }
 
-    else if (n->left)
+
+    Node *pre = getPredecessorNode(value);
+    Node *suc = getSuccessorNode(value);
+
+    if (!pre)
     {
-        Node *temp = n->left;
-        n->info = temp->info;
-        delete temp;
-        return true;
+        pre = suc;
     }
 
-    else if (n->right)
+    pre->left = n->left;
+    pre->right = n->right;
+
+    if (n->parent && n->info < n->parent->info)
     {
-        Node *temp = n->right;
-        n->info = temp->info;
-        delete temp;
-        return true;
+        n->parent->left = pre;
+        pre->parent = n->parent;
+    }
+    else if (n->parent)
+    {
+        n->parent->right = pre;
+        pre->parent = n->parent;
     }
 
-    return false;
+    delete n;
+    return true;
+
+
+    // Node *n = getNodeFor(value, this->root);
+
+    // if (!n)
+    // {
+    //     return false;
+    // }
+
+    // if (n->parent && !n->left && !n->right)
+    // {
+    //     if (n->info < n->parent->info)
+    //     {
+    //         n->parent->left = nullptr;
+    //     }
+    //     else
+    //     {
+    //         n->parent->right = nullptr;
+    //     }
+    //     return true;
+    // }
+
+    // else if (n->left && n->right)
+    // {
+    //     Node *temp = getPredecessorNode(n->info);
+    //     n->info = temp->info;
+    //     delete temp;
+    //     return true;
+    // }
+
+    // else if (n->left)
+    // {
+    //     Node *temp = n->left;
+    //     n->info = temp->info;
+    //     delete temp;
+    //     return true;
+    // }
+
+    // else if (n->right)
+    // {
+    //     Node *temp = n->right;
+    //     n->info = temp->info;
+    //     delete temp;
+    //     return true;
+    // }
+
+    // return false;
 }
