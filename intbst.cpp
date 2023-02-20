@@ -397,19 +397,14 @@ bool IntBST::remove(int value)
         return false;
     } 
 
-    if (count() == 1)
-    {
-        this->root = nullptr;
-        delete n;
-    }
-
     if (!n->left && !n->right) // no children case
     {
-        // if (n == this->root) // one node case
-        // {
-        //     this->root = NULL;
-        // } 
-        if (isLeftChild) 
+        if (n == this->root) // one node case
+        {
+            this->root = NULL;
+            delete n;
+        } 
+        else if (isLeftChild) 
         {
             n->parent->left = NULL;
         } 
