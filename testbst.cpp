@@ -16,14 +16,16 @@ int main()
     IntBST bst1, bst2;
 
     // insert data to bst1
-    bst1.insert(-4);
-    bst1.insert(-7);
-    bst1.insert(-12);
-    bst1.insert(13);
-    bst1.insert(9);
-    bst1.insert(18);
+    bst1.insert(64);
+    bst1.insert(128);
+    bst1.insert(8);
+    bst1.insert(512);
+    bst1.insert(256);
+    bst1.insert(32);
+    bst1.insert(16);
+    bst1.insert(4);
 
-    // let user choose one or all tests
+
     bool all = true;
     int testnum = getTest();
     if (testnum)

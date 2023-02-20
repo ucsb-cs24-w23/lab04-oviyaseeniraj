@@ -366,50 +366,6 @@ IntBST::Node *IntBST::getSuccessorNode(int value) const
         }
         return n;
     }
-
-    // if (count() == 0)
-    // {
-    //     return nullptr;
-    // }
-
-    // Node *n = getNodeFor(value, this->root);
-
-    // if (n == NULL)
-    // {
-    //     return nullptr;
-    // }
-
-    // if (!n->right)
-    // {
-
-    //     while (n->parent && value < n->parent->info)
-    //     {
-    //         n = n->parent;
-    //     }
-        
-    //     if (n->info > value)
-    //     {
-    //         return n;
-    //     }
-    //     return 0;
-    // }
-
-    // if (n->right && n->right->left)
-    // {
-    //     n = n->right;
-    //     while (n->left)
-    //     {
-    //         n = n->left;
-    //     }
-    //     return n;
-    // }
-
-    // else if (n->right)
-    // {
-    //     return n->right;
-    // }
-
-    // return n;
 }
 
 // returns the successor value of the given value or 0 if there is none
@@ -428,94 +384,97 @@ int IntBST::getSuccessor(int value) const
 // returns true if the node exist and was deleted or false if the node does not exist
 bool IntBST::remove(int value)
 {
-    Node *n = getNodeFor(value, this->root);
+    Node* n = getNodeFor(value,this->root);
 
-    // node does not exist, return false
-    if (!n)
+    bool isLeftChild;
+    if (n->parent)
+        isLeftChild = (n->info < n->parent->info);
+    else
+        isLeftChild = false;
+
+    if (!n) // node does not exist
     {
         return false;
-    }
+    } 
 
-    // no child cases:
-    if (!n->left && !n->right)
+    if (!n->left && !n->right) // no children case
     {
-        if (n->parent)
+        if (n == this->root) // one node case
         {
-            if (n->info < n->parent->info)
-            {
-                n->parent->left = nullptr;
-            }
-            else
-            {
-                n->parent->right = nullptr;
-            }
-            delete n;
-            return true;
+            this->root = NULL;
+        } 
+        else if (isLeftChild) 
+        {
+            n->parent->left = NULL;
+        } 
+        else 
+        {
+            n->parent->right = NULL;
         }
-    }
+        delete n;
+        return true;
+    } 
 
     // one child cases:
 
-    if (n->left && !n->right)
+    else if (!n->left) 
     {
-        if (n->parent->left && n == n->parent->left)
+        if (n == this->root) // root case: does not have parent
         {
-            n->parent->left = n->left;
-            n->left->parent = n->parent;
+            this->root = n->right;
             delete n;
             return true;
-        }
-        else{
-            n->parent->right = n->left;
-            n->left->parent = n->parent;
-            delete n;
-            return true;
-        }
-    }
-
-    if (n->right && !n->left)
-    {
-        if (n->parent->left && n == n->parent->left)
+        } 
+        else if (isLeftChild) 
         {
             n->parent->left = n->right;
             n->right->parent = n->parent;
             delete n;
             return true;
-        }
-        else{
+        } 
+        else 
+        {
             n->parent->right = n->right;
             n->right->parent = n->parent;
             delete n;
             return true;
         }
-    }
+    } 
 
-
-    Node *pre = getPredecessorNode(value);
-    Node *suc = getSuccessorNode(value);
-
-    if (!pre)
+    else if (!n->right) 
     {
-        pre = suc;
-    }
-
-    pre->left = n->left;
-    pre->right = n->right;
-
-    if (n->parent && n->info < n->parent->info)
+        if (n == this->root) // root case, no parent
+        {
+            this->root = n->left;
+            delete n;
+            return true;
+        } 
+        else if (isLeftChild) 
+        {
+            n->parent->left = n->left;
+            n->left->parent = n->parent;
+            delete n;
+            return true;
+        } 
+        else 
+        {
+            n->parent->right = n->left;
+            n->left->parent = n->parent;
+            delete n;
+            return true;
+        }
+    } 
+    else // two node case
     {
-        n->parent->left = pre;
-        pre->parent = n->parent;
-    }
-    else if (n->parent)
-    {
-        n->parent->right = pre;
-        pre->parent = n->parent;
-    }
+        Node* pre = getPredecessorNode(value);
+        if (!pre) 
+            return false;
 
-    delete n;
-    return true;
-
+        int newVal = pre->info;
+        remove(pre->info);
+        n->info = newVal;
+        return true;
+    }
 
     // Node *n = getNodeFor(value, this->root);
 
@@ -534,30 +493,34 @@ bool IntBST::remove(int value)
     //     {
     //         n->parent->right = nullptr;
     //     }
+    //     delete n;
+    //     return true;
+    // }
+
+    // else if (n->parent && n->left && !n->right)
+    // {
+    //     Node *l = n->left;
+    //     n->parent->left = l;
+    //     l->parent = n->parent;
+    //     delete n;
+    //     return true;
+    // }
+
+    // else if (n->parent && n->right && !n->left)
+    // {
+    //     Node *r = n->right;
+    //     n->parent->right = r;
+    //     r->parent = n->parent;
+    //     delete n;
     //     return true;
     // }
 
     // else if (n->left && n->right)
     // {
     //     Node *temp = getPredecessorNode(n->info);
-    //     n->info = temp->info;
-    //     delete temp;
-    //     return true;
-    // }
-
-    // else if (n->left)
-    // {
-    //     Node *temp = n->left;
-    //     n->info = temp->info;
-    //     delete temp;
-    //     return true;
-    // }
-
-    // else if (n->right)
-    // {
-    //     Node *temp = n->right;
-    //     n->info = temp->info;
-    //     delete temp;
+    //     int val = temp->info;
+    //     remove(temp->info);
+    //     n->info = val;
     //     return true;
     // }
 
