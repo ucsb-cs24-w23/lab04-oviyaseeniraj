@@ -78,14 +78,19 @@ int main()
         bst1.remove(64);
         cout << "  removing 128" << endl;
         bst1.remove(128);
+        bst1.remove(16);
+        bst1.remove(32);
+        bst1.remove(256);
+        bst1.remove(512);
+        bst1.remove(8);
         cout << "  contains 64? " << (bst1.contains(64) ? "Y" : "N") << endl;
         cout << "  contains 4? " << (bst1.contains(4) ? "Y" : "N") << endl;
         cout << "  contains 16? " << (bst1.contains(16) ? "Y" : "N") << endl;
         cout << "  contains 128? " << (bst1.contains(128) ? "Y" : "N") << endl;
         cout << "  contains 17? " << (bst1.contains(17) ? "Y" : "N") << endl;
         cout << "  contains 512? " << (bst1.contains(512) ? "Y" : "N") << endl;
-        cout << "  pre-order: ";
-        bst1.printPreOrder();
+        cout << "  in-order: ";
+        bst1.printInOrder();
         cout << endl;
     }
 

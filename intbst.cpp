@@ -386,23 +386,25 @@ bool IntBST::remove(int value)
 {
     Node* n = getNodeFor(value,this->root);
 
-    bool isLeftChild;
-    if (n->parent)
-        isLeftChild = (n->info < n->parent->info);
-    else
-        isLeftChild = false;
 
     if (!n) // node does not exist
     {
         return false;
     } 
 
-    if (count() == 1)
+    bool isLeftChild;
+    if (n->parent)
+        isLeftChild = (n->info < n->parent->info);
+    else
+        isLeftChild = false;
+
+    if (count() == 1) // one node case
     {
         this->root = nullptr;
         delete n;
         return true;
     }
+
     if (!n->left && !n->right) // no children case
     {
         // if (n == this->root) // one node case
@@ -428,6 +430,7 @@ bool IntBST::remove(int value)
         if (n == this->root) // root case: does not have parent
         {
             this->root = n->right;
+            this->root->parent = nullptr;
             delete n;
             return true;
         } 
@@ -452,6 +455,7 @@ bool IntBST::remove(int value)
         if (n == this->root) // root case, no parent
         {
             this->root = n->left;
+            this->root->parent = nullptr;
             delete n;
             return true;
         } 
